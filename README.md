@@ -8,7 +8,7 @@ It is built as a simple tool, without any futher intentions. No action is taken 
 2nd tab: XSLT source
 3th tab: output XML
 
-Switch between tabs: cmd tab or the Win equivalent
+Switch between tabs: cmd 1/2/3 or the Win equivalent
 
 Execute the compilation: Execute (cmd e)
 
