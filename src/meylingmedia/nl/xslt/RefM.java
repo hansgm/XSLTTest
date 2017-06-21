@@ -13,8 +13,6 @@ import org.w3c.dom.Document;
 public class RefM {
 	public Document document = null;
 	private static final String fileName = "src/meylingmedia/nl/xslt/XSLTReference.xml";
-	//  /Users/hansgmeligmeyling/Documents/workspace/TestHGM/./XSLTReference.xml
-	//	/Users/hansgmeligmeyling/Documents/workspace/TestHGM/src/meylingmedia/nl/xslt/XSLTReference.xml
 	
 	RefM(){
 		try{
