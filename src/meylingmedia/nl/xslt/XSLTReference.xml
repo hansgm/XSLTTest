@@ -1,0 +1,200 @@
+<xsltReference>
+	<xsl:BasicTemplate>
+		<xsl:transform version="1.0"
+			xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+			<xsl:template match="/">
+				<xsl:for-each select="path ">
+					<ns1:anyTag xmlns:ns1="urn:myurn:subdomain:domain">
+						<ns1:anySubTag>
+							<xsl:value-of select="field" />
+						</ns1:anySubTag>
+						<ns1:whatEver>Text of whatEver</ns1:whatEver>
+					</ns1:anyTag>
+				</xsl:for-each>
+			</xsl:template>
+		</xsl:transform>
+	</xsl:BasicTemplate>
+	<xsl:choose>
+		<xsl:when test="expression">
+		</xsl:when>
+		<xsl:otherwise>
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:for-each>
+		<xsl:for-each select="//organisationdata">
+          <xsl:choose>
+          <!-- check if selected subgroup has element product -->
+          	<xsl:when test=".//product">
+            	<xsl:copy-of select="."/>
+            </xsl:when>
+          </xsl:choose>		
+		</xsl:for-each>
+		<xsl:for-each select="//organisationdata[.//product]">
+		</xsl:for-each>
+		<xsl:for-each select="following-sibling::author">
+		</xsl:for-each>
+		<xsl:for-each select="preceding-sibling::author">
+		</xsl:for-each>
+		<xsl:for-each select="ancestor::author">
+		</xsl:for-each>
+		<forEachOnReference>
+			<xsl:variable name="FIELD"
+				select="/SyndicationMap/Destination//Item[@id=$INDEX]" />
+			<xsl:for-each select="$FIELD/ancestor::Item">
+				<xsl:text>/</xsl:text>
+				<xsl:value-of select="./@name" />
+			</xsl:for-each>
+		</forEachOnReference>
+
+		<siblingWithCheckOnPreceding>
+			<xsl:for-each select="./Header">
+				<xsl:variable name="header" select="." />
+				<Document>
+					<xsl:copy-of select="$header" />
+
+					<xsl:for-each
+						select="following-sibling::Position[preceding-sibling::Header[1] = $header]">
+						<!--xsl:for-each select="following-sibling::Position" -->
+						<xsl:copy-of select="." />
+					</xsl:for-each>
+				</Document>
+			</xsl:for-each>
+		</siblingWithCheckOnPreceding>
+
+	</xsl:for-each>
+	<xsl:if test="expression">
+		...some output if the expression is true...
+	</xsl:if>
+	<xsl:sort select="artist" />
+	<xsl:stylesheet version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	</xsl:stylesheet>
+	<xsl:template>
+	</xsl:template>
+	<xsl:value-of>
+		<xsl:value-of select="catalog/cd/title" />
+	</xsl:value-of>
+	<variables type="list">
+		<xsl:variable name="REFS">
+			<attrib len="1" sep="," ref="Identifier" />
+			<attrib len="10" sep="," ref="Debtor" />
+			<attrib len="10" sep="," ref="Date" />
+			<attrib len="12" sep="," ref="EdiRef" />
+		</xsl:variable>
+		<xsl:for-each select="$FieldRefs">
+			<xsl:variable name="FieldName" select="./@ref" />
+			<xsl:value-of select="$Order/*[name(.)=$FieldName]" />
+			<xsl:with-param name="LENGTH">
+				<xsl:value-of select="./@len" />
+			</xsl:with-param>
+		</xsl:for-each>
+	</variables>
+
+	<xsl:when>
+		<basic>
+			<xsl:choose>
+				<xsl:when test="./@output-type='XMLElement'">
+					<xsl:text>/</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>@</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</basic>
+		<attribhasValue>
+			<xsl:when test="$FIELD/@output-type='XMLElement'" />
+		</attribhasValue>
+		<checkIfElementExists>
+			<xsl:choose>
+				<xsl:when test="./Causes" />
+				<xsl:otherwise>
+					<xsl:call-template name="Abnorm">
+						<xsl:with-param name="ABNORMALITY" select="." />
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
+		</checkIfElementExists>
+	</xsl:when>
+	<xpath>
+		<fieldOrAttributeInCurrentElement>
+			<xsl:value-of select="./WidthMeasure" />
+			<xsl:value-of select="./Dimensions/WidthMeasure/@unitCode" />
+		</fieldOrAttributeInCurrentElement>
+		<backTraversal>
+			<xsl:value-of select="../../TransportOrder/DocumentID/ID" />
+			<xsl:value-of
+				select="./ancestor::StopPartyEvent/TransportEvent/TransportEventID" />
+		</backTraversal>
+
+		<findElementNameBackWithSuddenElement>
+			<xsl:with-param name="THU"
+				select="name(ancestor::*[./HazardousRiskIndicator ] )" />
+		</findElementNameBackWithSuddenElement>
+
+		<firstOccurenceInDocument>
+			<xsl:value-of select="//DocumentDateTime" />
+			<xsl:value-of select="//DocumentID/RevisionID/ID" />
+		</firstOccurenceInDocument>
+		<findWithItemAttrOnAnyLevel>
+			<xsl:variable name="FIELD"
+				select="/SyndicationMap/Destination//Item[@id=$INDEX]" />
+		</findWithItemAttrOnAnyLevel>
+
+	</xpath>
+
+	<turnDocumentRoot>
+		<xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+			version="1.0">
+			<xsl:template match="/">
+				<tpo:myNewRootLevel xmlns:tpo="urn:my:unique:id">
+					<xsl:for-each select="*/*/.">
+						<xsl:copy-of select="." />
+					</xsl:for-each>
+				</tpo:myNewRootLevel>
+			</xsl:template>
+		</xsl:transform>
+	</turnDocumentRoot>
+	<iteration>
+		<xsl:for-each
+			select="following-sibling::Position[preceding-sibling::Header[1] = $header]">
+			<!--xsl:for-each select="following-sibling::Position" -->
+			<xsl:copy-of select="." />
+		</xsl:for-each>
+		<xsl:for-each
+			select="//xs:complexType[@name='DimensionType']//xs:element[@name='Type']">
+			<lupa>
+				<xsl:value-of select="name()" />
+			</lupa>
+		</xsl:for-each>
+	</iteration>
+	<specialOutputTypes>
+		<xsl:output encoding="utf-8" omit-xml-declaration="yes" />
+	</specialOutputTypes>
+	<specialFunctions>
+
+		<xsl:template name="fixLength">
+			<xsl:param name="INSTRING" />
+			<xsl:param name="LENGTH" />
+			<xsl:value-of select="substring($INSTRING,1,$LENGTH)" />
+			<xsl:call-template name="pad">
+				<xsl:with-param name="LENSTRING">
+					<xsl:value-of select="string-length($INSTRING)" />
+				</xsl:with-param>
+				<xsl:with-param name="PADLENGTH">
+					<xsl:value-of select="$LENGTH" />
+				</xsl:with-param>
+			</xsl:call-template>
+		</xsl:template>
+		<xsl:template name="pad">
+			<xsl:param name="LENSTRING" />
+			<xsl:param name="PADLENGTH" />
+			<xsl:if test="$LENSTRING &lt; $PADLENGTH">
+				<xsl:value-of select="$SPACE" />
+				<xsl:call-template name="pad">
+					<xsl:with-param name="LENSTRING" select="$LENSTRING + 1" />
+					<xsl:with-param name="PADLENGTH" select="$PADLENGTH" />
+				</xsl:call-template>
+			</xsl:if>
+		</xsl:template>
+	</specialFunctions>
+</xsltReference>

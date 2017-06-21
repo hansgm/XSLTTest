@@ -1,0 +1,37 @@
+<xsltReference>
+	<xsl:BasicTemplate>
+		<xsl:transform version="1.0"
+			xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+			<xsl:template match="/">
+				<xsl:for-each select="path ">
+					<ns1:anyTag xmlns:ns1="urn:myurn:subdomain:domain">
+						<ns1:anySubTag>
+							<xsl:value-of select="field" />
+						</ns1:anySubTag>
+						<ns1:whatEver>Text of whatEver</ns1:whatEver>
+					</ns1:anyTag>
+				</xsl:for-each>
+			</xsl:template>
+		</xsl:transform>
+	</xsl:BasicTemplate>
+	<xsl:choose>
+		<xsl:when test="expression">
+		</xsl:when>
+		<xsl:otherwise> 
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:for-each>
+	</xsl:for-each>
+	<xsl:if test="expression">
+		...some output if the expression is true...
+	</xsl:if>
+	<xsl:sort select="artist" />
+	<xsl:stylesheet version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	</xsl:stylesheet>
+	<xsl:template>
+	</xsl:template>
+	<xsl:value-of>
+		<xsl:value-of select="catalog/cd/title" />
+	</xsl:value-of>
+</xsltReference>
